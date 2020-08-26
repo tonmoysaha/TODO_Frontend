@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-list-todos',
@@ -7,7 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListTodosComponent implements OnInit {
 
-  constructor() { }
+  todos = [
+    {id: 1, description: 'Walk need to done'},
+    {id: 2, description: 'Walk need to done'},
+    {id: 3, description: 'Walk need to done'},
+    {id: 4, description: 'Walk need to done'}
+    ];
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
