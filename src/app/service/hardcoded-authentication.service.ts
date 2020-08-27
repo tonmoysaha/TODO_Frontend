@@ -1,17 +1,26 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HardcodedAuthenticationService {
 
-  constructor() { }
+  constructor() {
+  }
 
-  authenticate(username, password){
+  authenticate(username, password) {
     if (username === 'opi' && password === 'opisaha') {
+      sessionStorage.setItem('authenticatedUser', username);
       return true;
-    }else {
+    } else {
       return false;
     }
+  }
+
+  isUserLoggedIn() {
+    let user = sessionStorage.getItem('authenticatedUser');
+    console.log(user)
+    return !(user === null)
+
   }
 }
