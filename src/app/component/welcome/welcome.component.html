@@ -8,3 +8,11 @@
   Get Your Welcome message
   <button (click)="getWelcomeMessage()" class="btn btn-success">Get WelcomeMessage</button>
 </div>
+
+<div class="container" *ngIf="welcome">
+   Your Welcome message: {{ welcome }}
+</div>
+
+<div class="container" *ngIf="message">
+  Your Welcome message2: {{ message.message }}
+</div>

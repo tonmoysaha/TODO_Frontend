@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {WelcomedataService} from '../../service/data/welcomedata.service';
+import {HelloWorldBean , WelcomedataService} from '../../service/data/welcomedata.service';
 
 @Component({
   selector: 'app-welcome',
@@ -10,6 +10,8 @@ import {WelcomedataService} from '../../service/data/welcomedata.service';
 export class WelcomeComponent implements OnInit {
 
   name : string;
+  welcome: string;
+  message: HelloWorldBean;
   constructor(private activatedRoute: ActivatedRoute,
               private service: WelcomedataService) { }
 
@@ -19,6 +21,12 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeMessage() {
-    this.service.execcuteWelcomeBean();
+    this.service.execcuteHelloWorld().subscribe(data =>
+      this.welcome = data
+    );
+
+    this.service.execcuteWelcomeBean().subscribe(data =>
+      this.message = data
+    );
   }
 }

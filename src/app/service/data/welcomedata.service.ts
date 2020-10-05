@@ -1,13 +1,29 @@
 import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+
+
+export  class HelloWorldBean {
+
+  message: string;
+
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class WelcomedataService {
 
-  constructor() { }
+  constructor(private httpclient: HttpClient) { }
 
-  execcuteWelcomeBean(){
-    console.log("get your welcome message")
+  execcuteHelloWorld(): Observable<string>{
+    let url = 'http://localhost:8080/hello-world';
+    return this.httpclient.get(url, {responseType: 'text'});
+    console.log("get your welcome message");
+  }
+
+  execcuteWelcomeBean(): Observable<HelloWorldBean>{
+    let url = 'http://localhost:8080/hello-world-bean';
+    return this.httpclient.get<HelloWorldBean>(url);
   }
 }
