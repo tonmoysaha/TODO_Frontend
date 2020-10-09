@@ -1,5 +1,9 @@
 <H1>Welcome!</H1>
 
+<div class="container " *ngIf="errorResponse" style="background-color: red; padding: 5%">
+  Your Welcome message2  Via Logger: {{ errorResponse }}
+</div>
+
 <div class="container">
   Welcome {{name}}. You can manage your todos <a routerLink="/todos">here</a>
 </div>
@@ -15,4 +19,8 @@
 
 <div class="container" *ngIf="message">
   Your Welcome message2: {{ message.message }}
+</div>
+
+<div class="container" *ngIf="messageWittPAth">
+  Your Welcome message2  Via Logger: {{ messageWittPAth.message }}
 </div>

@@ -26,4 +26,9 @@ export class WelcomedataService {
     let url = 'http://localhost:8080/hello-world-bean';
     return this.httpclient.get<HelloWorldBean>(url);
   }
+
+  execcuteWelcomeBeanWithPath(name): Observable<HelloWorldBean>{
+    let url = `http://localhost:8080/hello-world-bean/${name}`;
+    return this.httpclient.get<HelloWorldBean>(url);
+  }
 }

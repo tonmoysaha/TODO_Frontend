@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HelloWorldBean , WelcomedataService} from '../../service/data/welcomedata.service';
+import {error} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-welcome',
@@ -11,7 +12,9 @@ export class WelcomeComponent implements OnInit {
 
   name : string;
   welcome: string;
+  errorResponse: string;
   message: HelloWorldBean;
+  messageWittPAth: HelloWorldBean;
   constructor(private activatedRoute: ActivatedRoute,
               private service: WelcomedataService) { }
 
@@ -27,6 +30,10 @@ export class WelcomeComponent implements OnInit {
 
     this.service.execcuteWelcomeBean().subscribe(data =>
       this.message = data
+    );
+
+    this.service.execcuteWelcomeBeanWithPath('sadad').subscribe(data =>
+      this.messageWittPAth = data, error => this.errorResponse = error.error.message
     );
   }
 }
