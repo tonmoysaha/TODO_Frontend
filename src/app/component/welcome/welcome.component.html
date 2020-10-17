@@ -1,6 +1,6 @@
 <H1>Welcome!</H1>
 
-<div class="container " *ngIf="errorResponse" style="background-color: red; padding: 5%">
+<div class="container " *ngIf="errorResponse" [style.background-color]="errorResponse ? 'red' : null">
   Your Welcome message2  Via Logger: {{ errorResponse }}
 </div>
 

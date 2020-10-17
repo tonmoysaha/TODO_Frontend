@@ -32,7 +32,7 @@ export class WelcomeComponent implements OnInit {
       this.message = data
     );
 
-    this.service.execcuteWelcomeBeanWithPath('sadad').subscribe(data =>
+    this.service.execcuteWelcomeBeanWithPath(this.name).subscribe(data =>
       this.messageWittPAth = data, error => this.errorResponse = error.error.message
     );
   }
