@@ -22,6 +22,11 @@ export class TododataService {
     return this.httpClient.delete(url);
   }
 
+  updateTodo(username, id , todo) {
+    const url = `http://localhost:8080/users/${username}/todos/${id}`;
+    return this.httpClient.put<Todo>(url,todo);
+  }
+
   retriveTodo(): Todo{
     return this.todo;
   }
