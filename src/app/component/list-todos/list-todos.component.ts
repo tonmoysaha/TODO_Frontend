@@ -10,6 +10,7 @@ import {TododataService} from '../../service/data/tododata.service';
 export class ListTodosComponent implements OnInit {
 
   todos: Todo[];
+  message: string;
     // [
     // new Todo(1,'Walk need to done', false, new Date()),
     // new Todo(2,'Walk need to done', false, new Date()),
@@ -27,4 +28,9 @@ export class ListTodosComponent implements OnInit {
     })
   }
 
+  deleteTodo(id: number) {
+    this.todoService.deleteTodo('opi', id).subscribe(response => {
+      this.message = `The Todo of Id ${id} Deleted Successfully`;
+    })
+  }
 }
