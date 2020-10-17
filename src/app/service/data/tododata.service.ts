@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Todo} from '../../shared/todo';
 import {Router} from '@angular/router';
@@ -8,15 +8,25 @@ import {Router} from '@angular/router';
 })
 export class TododataService {
 
-  constructor(private httpClient: HttpClient) { }
+  todo: Todo;
+  constructor(private httpClient: HttpClient) {
+  }
 
-  retriveAllTodos(username){
-    const url = `http://localhost:8080/users/${username}/todos`
+  retriveAllTodos(username) {
+    const url = `http://localhost:8080/users/${username}/todos`;
     return this.httpClient.get<Todo[]>(url);
   }
 
-  deleteTodo(username, id){
-    const url = `http://localhost:8080/users/${username}/todos/${id}`
+  deleteTodo(username, id) {
+    const url = `http://localhost:8080/users/${username}/todos/${id}`;
     return this.httpClient.delete(url);
+  }
+
+  retriveTodo(): Todo{
+    return this.todo;
+  }
+
+   getTodo(todo) {
+    this.todo = todo;
   }
 }

@@ -14,12 +14,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let todo of todos">
+    <tr *ngFor="let todo of todos" >
       <td>{{ todo.description }}</td>
       <td>{{ todo.targetDate | date| uppercase }}</td>
       <td>{{ todo.done }}</td>
       <td>
-        <button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button>
+        <button (click)="updateTodo(todo.id, todo)"  class="btn btn-success">Update</button>
       </td>
       <td>
         <button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button>

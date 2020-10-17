@@ -43,7 +43,8 @@ export class ListTodosComponent implements OnInit {
     })
   }
 
-  updateTodo(id: number) {
+  updateTodo(id: number, todo: Todo) {
+    this.todoService.getTodo(todo);
     this.router.navigate(['todos', id]);
   }
 }
