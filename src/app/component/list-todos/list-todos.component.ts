@@ -1,17 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
-export  class TODO {
-
-  constructor(
-    public  id: number,
-    public  description: string,
-    public done: boolean,
-    public targetDate: Date
-
-  ){
-
-  }
-}
+import {Todo} from '../../shared/todo';
 
 @Component({
   selector: 'app-list-todos',
@@ -21,11 +9,11 @@ export  class TODO {
 export class ListTodosComponent implements OnInit {
 
   todos = [
-    new TODO(1,'Walk need to done', false, new Date()),
-    new TODO(2,'Walk need to done', false, new Date()),
-    new TODO(3,'Walk need to done', false, new Date()),
-    new TODO(4,'Walk need to done', false, new Date()),
-    new TODO(5,'Walk need to done', false, new Date())
+    new Todo(1,'Walk need to done', false, new Date()),
+    new Todo(2,'Walk need to done', false, new Date()),
+    new Todo(3,'Walk need to done', false, new Date()),
+    new Todo(4,'Walk need to done', false, new Date()),
+    new Todo(5,'Walk need to done', false, new Date())
     ];
 
   constructor() {
