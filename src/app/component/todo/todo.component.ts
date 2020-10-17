@@ -13,7 +13,6 @@ export class TodoComponent implements OnInit {
   constructor(private todoService: TododataService) { }
 
   ngOnInit(): void {
-    this.todo = new Todo(1,'', false, new Date());
     this.todo =  this.todoService.retriveTodo();
   }
 
