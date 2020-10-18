@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Todo} from '../../shared/todo';
-import {Router} from '@angular/router';
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +28,7 @@ export class TododataService {
   }
 
   createTodo(username, todo) {
+    console.log(todo);
     const url = `http://localhost:8080/users/${username}/todos`;
     return this.httpClient.post<Todo>(url,todo);
   }
