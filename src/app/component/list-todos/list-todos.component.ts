@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 })
 export class ListTodosComponent implements OnInit {
 
-  todos: Todo[];
+  todos: Todo[] = [];
   message: string;
     // [
     // new Todo(1,'Walk need to done', false, new Date()),
