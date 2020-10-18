@@ -24,14 +24,16 @@ export class TodoComponent implements OnInit {
   }
 
   saveTodo() {
-    this.todoService.updateTodo('opi', this.id, this.todo).subscribe(
-      response => {
-        this.todo = response;
+    if (this.id !== -1) {
+      this.todoService.updateTodo('opi', this.id, this.todo).subscribe(
+        response => {
+          this.todo = response;
+          this.routers.navigate(['todos']);
+        });
+    } else {
+      this.todoService.createTodo('opi', this.todo).subscribe(response => {
         this.routers.navigate(['todos']);
       });
-
-    this.todoService.createTodo('opi', this.todo).subscribe( response => {
-      this.routers.navigate(['todos']);
-    })
+    }
   }
 }
