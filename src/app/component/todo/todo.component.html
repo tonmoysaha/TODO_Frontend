@@ -1,21 +1,31 @@
 <div class="container">
-  <div class="text-center" [ngStyle]="{'paddingTop.px': 50}">
-    <img src="/assets/images/todologo.gif" class="img-responsive"
-         height="100px" width="200px">
+  <div [ngStyle]="{'paddingTop.px': 50}" class="text-center">
+    <img class="img-responsive" height="100px"
+         src="/assets/images/todologo.gif" width="200px">
   </div>
-  <div align="center" [ngStyle]="{'paddingTop.px': 40}">
-<div class="form-group col-md-6">
-  <label for="description">Description</label>
-  <input type= "text" [(ngModel)]="todo.description" class="form-control" id="description" name="description" placeholder="Description">
-</div>
+  <form #todoForm="ngForm" (ngSubmit)="!todoForm.invalid && saveTodo()">
+    <div [ngStyle]="{'paddingTop.px': 40}" align="center">
+      <div class="alert alert-warning col-md-6" *ngIf="todoForm.invalid && todoForm.dirty">Please Enter Valid Data</div>
+      <div class="alert alert-warning col-md-6" *ngIf="targetDate.invalid && todoForm.dirty">Please Enter Target Date</div>
+      <div class="alert alert-warning col-md-6" *ngIf="description.invalid && todoForm.dirty">Please Enter Description</div>
+      <div class="form-group col-md-6">
+        <label for="description">Description</label>
+        <input (ngModelChange)="todo.description = $event" [ngModel]="todo?.description" class="form-control"
+               id="description"
+               name="description" placeholder="Description" required="required" ng-required="true" type="text" #description="ngModel" minlength="6">
+      </div>
 
-<div class="form-group col-md-6">
-  <label for="targetDate">Target Date</label>
-  <input type = "date" [ngModel]="todo?.targetDate | date: 'yyyy-MM-dd'" (ngModelChange)="todo.targetDate = $event" class="form-control" id="targetDate" placeholder="Target Date" >
-</div>
+      <div class="form-group col-md-6">
+        <label for="targetDate">Target Date</label>
+        <input (ngModelChange)="todo.targetDate = $event" [ngModelOptions]="{standalone: true}" [ngModel]="todo?.targetDate | date: 'yyyy-MM-dd'"
+               class="form-control"
+               id="targetDate"
+               name="targetDate" placeholder="Target Date" required="required" type="date" #targetDate="ngModel"  ng-required="required">
+      </div>
 
-  <div class="form-group col-md-6 text-center">
-  <button (click)="saveTodo()" class="btn btn-success">Save</button>
-  </div>
-  </div>
+      <div class="form-group col-md-6 text-center">
+        <button class="btn btn-success" type="submit">Save</button>
+      </div>
+    </div>
+  </form>
 </div>
