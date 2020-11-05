@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
 export  class HelloWorldBean {
-
   message: string;
-
 }
 
 @Injectable({
@@ -17,18 +15,47 @@ export class WelcomedataService {
   constructor(private httpclient: HttpClient) { }
 
   execcuteHelloWorld(): Observable<string>{
+
+    let basicAuthHeaderString = this.createBasicAuthenticationHeader();
+
+    let headers = new HttpHeaders({
+      Authorization : basicAuthHeaderString
+    })
+
     let url = 'http://localhost:8080/hello-world';
-    return this.httpclient.get(url, {responseType: 'text'});
+    return this.httpclient.get(url, {headers , responseType: 'text'});
     console.log("get your welcome message");
   }
 
   execcuteWelcomeBean(): Observable<HelloWorldBean>{
+    let basicAuthHeaderString = this.createBasicAuthenticationHeader();
+
+    let headers = new HttpHeaders({
+      Authorization : basicAuthHeaderString
+    })
+
     let url = 'http://localhost:8080/hello-world-bean';
-    return this.httpclient.get<HelloWorldBean>(url);
+    return this.httpclient.get<HelloWorldBean>(url , {headers});
   }
 
   execcuteWelcomeBeanWithPath(name): Observable<HelloWorldBean>{
+
+    let basicAuthHeaderString = this.createBasicAuthenticationHeader();
+
+    let headers = new HttpHeaders({
+      Authorization : basicAuthHeaderString
+    });
+
+
     let url = `http://localhost:8080/hello-world-bean/${name}`;
-    return this.httpclient.get<HelloWorldBean>(url);
+    return this.httpclient.get<HelloWorldBean>(url , {headers});
   }
+
+  createBasicAuthenticationHeader() {
+    let username = "opi";
+    let password = "opisaha";
+    let basicAuthHeaderString = `Basic ` + window.btoa(username + ':' + password);
+    return basicAuthHeaderString;
+  }
+
 }
