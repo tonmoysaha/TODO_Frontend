@@ -23,7 +23,7 @@ export class WelcomedataService {
     })
 
     let url = 'http://localhost:8080/hello-world';
-    return this.httpclient.get(url, {headers , responseType: 'text'});
+    return this.httpclient.get<string>(url, {headers});
     console.log("get your welcome message");
   }
 

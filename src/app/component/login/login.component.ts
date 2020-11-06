@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {HardcodedAuthenticationService} from '../../service/hardcoded-authentication.service';
 import {BasicAuthenticationService} from '../../service/basic-authentication.service';
-import {error} from 'selenium-webdriver';
+
 
 @Component({
   selector: 'app-login',
@@ -32,6 +31,7 @@ export class LoginComponent implements OnInit {
         this.invalidLogin = false;
         },
       error => {
+        console.log(error);
         this.invalidLogin = true;
       })
   }
