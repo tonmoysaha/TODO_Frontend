@@ -12,7 +12,7 @@ export class HttpBasicOAuthServiceInterceptorService implements HttpInterceptor{
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-     let basicAuthHeaderString = this.basicAuthService.getAuthenticationToken();
+    let basicAuthHeaderString = this.basicAuthService.getAuthenticationToken();
     let userName = this.basicAuthService.getAuthencatedUser();
 
     if (basicAuthHeaderString && userName) {
