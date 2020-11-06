@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
-import {HardcodedAuthenticationService} from './hardcoded-authentication.service';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
 import {Observable} from 'rxjs';
+import {BasicAuthenticationService} from './basic-authentication.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs';
 export class RouteGuardService implements CanActivate {
 
   constructor(
-    private hardcodedAuthenticationService: HardcodedAuthenticationService,
+    private hardcodedAuthenticationService: BasicAuthenticationService,
     private router: Router) {
   }
 
