@@ -1,37 +1,34 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {API_URL, AUTHENTICATED_USER, TOKEN} from '../constants';
 import {map} from 'rxjs/operators';
-import {API_URL} from '../constants';
-
-export const AUTHENTICATED_USER = 'authenticatedUser';
-export const TOKEN = 'token';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BasicAuthenticationService {
+export class JwtAuthenticationServiceService {
 
   constructor(private httpClient: HttpClient) { }
 
-  executeBasicAuthenticationService(username, password) {
 
-    let basicAuthHeaderString = `Basic ` + window.btoa(username + ':' + password);
-    let headers = new HttpHeaders({
-      Authorization : basicAuthHeaderString
-    });
-    let url = `${API_URL}/basicAuth`;
-    return this.httpClient.get(url , {headers , responseType: 'text'}).pipe(
+  executeJwtAuhenticationService(username, password) {
+    let url = `${API_URL}/authenticate`;
+    return this.httpClient.post<any>(url , {
+      username,
+      password
+    }).pipe(
       map(
         data => {
           sessionStorage.setItem(AUTHENTICATED_USER, username);
-          sessionStorage.setItem(TOKEN, basicAuthHeaderString);
+          sessionStorage.setItem(TOKEN, `Bearer ${data.token}`);
           return data;
         }
       )
     );
   }
 
-   getAuthencatedUser() {
+
+  getAuthencatedUser() {
     return  sessionStorage.getItem(AUTHENTICATED_USER);
   }
 
@@ -52,6 +49,4 @@ export class BasicAuthenticationService {
     sessionStorage.removeItem(AUTHENTICATED_USER);
     sessionStorage.removeItem(TOKEN);
   }
-
-
 }
