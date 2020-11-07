@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree} from '@angular/router';
-import {Observable} from 'rxjs';
-import {BasicAuthenticationService} from './basic-authentication.service';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {JwtAuthenticationServiceService} from './jwt-authentication-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +8,13 @@ import {BasicAuthenticationService} from './basic-authentication.service';
 export class RouteGuardService implements CanActivate {
 
   constructor(
-    private basicAuthenticationService: BasicAuthenticationService,
+    private jwtAuthenticationService: JwtAuthenticationServiceService,
     private router: Router) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (this.basicAuthenticationService.isUserLoggedIn()) {
+    if (this.jwtAuthenticationService.isUserLoggedIn()) {
       return true;
     }
 

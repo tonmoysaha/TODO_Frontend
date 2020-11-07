@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {BasicAuthenticationService} from '../../service/basic-authentication.service';
+import {JwtAuthenticationServiceService} from '../../service/jwt-authentication-service.service';
 
 
 @Component({
@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
 
   constructor(private router: Router,
-   private basicAuthenticationService: BasicAuthenticationService) {
+   private jwtAuthenticationService: JwtAuthenticationServiceService) {
   }
 
   ngOnInit(): void {
@@ -24,9 +24,8 @@ export class LoginComponent implements OnInit {
 
   handleBasicAuthLogin() {
 
-    this.basicAuthenticationService.executeBasicAuthenticationService(this.username, this.password).subscribe(
+    this.jwtAuthenticationService.executeJwtAuhenticationService(this.username, this.password).subscribe(
       data => {
-        console.log(data);
         this.router.navigate(['welcome', this.username]);
         this.invalidLogin = false;
         },
