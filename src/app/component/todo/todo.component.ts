@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Todo} from '../../shared/todo';
 import {TododataService} from '../../service/data/tododata.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {JwtAuthenticationServiceService} from '../../service/jwt-authentication-service.service';
 
 @Component({
   selector: 'app-todo',
@@ -15,7 +16,8 @@ export class TodoComponent implements OnInit {
 
   constructor(private todoService: TododataService,
               private activateRoute: ActivatedRoute,
-              private routers: Router) {
+              private routers: Router,
+              private jwtAuthservice: JwtAuthenticationServiceService) {
   }
 
   ngOnInit(): void {
@@ -30,14 +32,14 @@ export class TodoComponent implements OnInit {
 
   saveTodo() {
     if (this.id === -1) {
-      this.todoService.createTodo('opi', this.todo).subscribe(
+      this.todoService.createTodo(this.jwtAuthservice.getAuthencatedUser(), this.todo).subscribe(
         response => {
           console.log(response);
           this.routers.navigate(['todos']);
         });
       console.log(this.todo.description);
     } else {
-      this.todoService.updateTodo('opi', this.id, this.todo).subscribe(
+      this.todoService.updateTodo(this.jwtAuthservice.getAuthencatedUser(), this.id, this.todo).subscribe(
         response => {
           this.todo = response;
           this.routers.navigate(['todos']);

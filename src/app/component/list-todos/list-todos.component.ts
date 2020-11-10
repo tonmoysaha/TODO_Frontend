@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Todo} from '../../shared/todo';
 import {TododataService} from '../../service/data/tododata.service';
 import {Router} from '@angular/router';
+import {JwtAuthenticationServiceService} from '../../service/jwt-authentication-service.service';
 
 @Component({
   selector: 'app-list-todos',
@@ -21,7 +22,8 @@ export class ListTodosComponent implements OnInit {
     // ];
 
   constructor(private todoService: TododataService,
-              private router: Router) {
+              private router: Router,
+              private jwtAuthService: JwtAuthenticationServiceService) {
   }
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class ListTodosComponent implements OnInit {
   }
 
   receiveAllTodo(){
-    this.todoService.retriveAllTodos('opi').subscribe(response => {
+    this.todoService.retriveAllTodos(this.jwtAuthService.getAuthencatedUser()).subscribe(response => {
       this.todos = response;
     })
 
